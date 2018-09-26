@@ -1,4 +1,4 @@
-const {db, Artist} = require('./database/index.js');
+const { db, Artist } = require('./database/index.js');
 const faker = require('faker');
 const fs = require('fs');
 const coolImages = require('cool-images');
@@ -17,7 +17,7 @@ for (let i = 1; i < 101; i++) {
     let album = {
       albumID: i * 10 + j,
       albumName: faker.random.words(),
-      albumImage: "https://s3.us-east-2.amazonaws.com/spotifyalbumplayer/Album+Images/"+ j +".jpeg",
+      albumImage: "https://s3.us-east-2.amazonaws.com/spotifyalbumplayer/Album+Images/" + j + ".jpeg",
       publishedYear: Math.floor(Math.random() * 69) + 1950,
       songs: []
     }
@@ -41,12 +41,12 @@ for (let i = 1; i < 101; i++) {
 fs.writeFile('data.json', JSON.stringify(allArtists), 'utf8', (err) => {
   if (err) throw err;
   console.log("File written!");
-  Artist.remove({}, function(err) {
+  Artist.remove({}, function (err) {
     if (err) throw err;
-    Artist.insertMany(allArtists, function(err,result) {
+    Artist.insertMany(allArtists, function (err, result) {
       if (err) throw err;
       console.log("In Database!")
-   });
+    });
   })
 })
 

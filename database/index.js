@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://root:WissemGamra1@ds211143.mlab.com:11143/artists');
+mongoose.connect('mongodb://spottyfi:spottyfi1!@ds115753.mlab.com:15753/albumlist-musicplayer');
 
 const db = mongoose.connection;
 
@@ -26,7 +26,7 @@ const ArtistSchema = new mongoose.Schema({
 var Artist = mongoose.model('Artist', ArtistSchema);
 
 var getArtist = (id, cb) => {
-  Artist.find({'artistID': id}, (err, data) => {
+  Artist.find({ 'artistID': id }, (err, data) => {
     if (err) throw err;
     cb(data);
   })
