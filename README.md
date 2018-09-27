@@ -58,20 +58,28 @@ Artist schema:
 ### Artists
 #### GET an Artist
 > Endpoint: /artists/albums/:id
-> Descriptio: where :id is equal to the ID of the artist you want to GET
+
+> Description: where :id is equal to the ID of the artist you want to GET
+
 > Response: Artist
 
 #### POST an Artist
 > Endpoint: /artists/albums
-> Descriptio: where the content type is JSON and the body is the Artist you want to POST
+
+> Description: where the content type is JSON and the body is the Artist you want to POST
+
 > Response: none
 
 #### UPDATE an Artist
 >  Endpoint: /artists/albums:id
-> Descriptio: where :id is equal to the ID of the artist and the body is the Artist data you want to UPDATE
+
+> Description: where :id is equal to the ID of the artist and the body is the Artist data you want to UPDATE
+
 > Response: none
 
 #### DELETE an Artist
 >  Endpoint: /artists/albums/:id
-> Descriptio: where :id is equal to the ID of the artist you want to DELETE
+
+> Description: where :id is equal to the ID of the artist you want to DELETE
+
 > Response: none
