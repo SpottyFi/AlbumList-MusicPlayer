@@ -12,6 +12,9 @@
     "react-dev": "webpack -d --watch",
     "react-prod": "webpack --watch",
     "seed-data": "node seedDatabase.js",
+    "gen-data": "node dataGeneration.js",
+    "upload-data": "mongoimport -h ds115753.mlab.com:15753 -d albumlist-musicplayer -c artists -u spottyfi -p spottyfi1! --jsonArray --file /Users/work/Dev/seed_data.json",
+    "upload-local-data": "mongoimport -d albumlist-musicplayer -c artists -u spottyfi -p spottyfi1! --jsonArray --file /Users/work/Dev/seed_data.json",
     "test": "jest"
   },
   "dependencies": {
@@ -48,10 +51,16 @@
     "babel-preset-react": "^6.23.0",
     "css-loader": "^1.0.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "grunt": "^1.0.3",
+    "grunt-run": "^0.8.1",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.0.1",
+    "gulp-run": "^1.7.1",
     "jest": "^23.6.0",
     "style-loader": "^0.23.0",
     "superagent": "^3.8.3",
     "supertest": "^3.3.0",
+    "time-grunt": "^1.4.0",
     "webpack": "^2.2.1"
   }
 }
