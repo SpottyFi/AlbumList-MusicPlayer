@@ -5,24 +5,15 @@ module.exports = (grunt) => {
     run: {
       createData: {
         cmd: 'npm',
-        args: [
-          'run',
-          'gen-data',
-        ],
+        args: ['run', 'seed-data'],
       },
       pushData: {
         cmd: 'npm',
-        args: [
-          'run',
-          'upload-data',
-        ],
+        args: ['run', 'upload-data'],
       },
       pushLocalData: {
         cmd: 'npm',
-        args: [
-          'run',
-          'upload-local-data',
-        ],
+        args: ['run', 'upload-local-data'],
       },
     },
   });
@@ -30,10 +21,7 @@ module.exports = (grunt) => {
   grunt.registerTask('push-data', ['run:pushData']);
   grunt.registerTask('push-local-data', ['run:pushLocalData']);
   grunt.registerTask('data-me', () => {
-    const MAX = grunt.option('max');
     const PUSH = grunt.option('mode') === 'production' ? 'push-data' : 'push-local-data';
-    for (let count = 1; count <= MAX; count += 1) {
-      grunt.task.run('create-data', PUSH);
-    }
+    grunt.task.run('create-data', PUSH);
   });
 };
