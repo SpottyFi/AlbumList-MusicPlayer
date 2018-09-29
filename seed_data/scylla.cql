@@ -1,4 +1,4 @@
-CREATE KEYSPACE IF NOT EXISTS spottyfi with {'class': 'SimpleStrategy', 'replication_factor' : 1};
+CREATE KEYSPACE IF NOT EXISTS spottyfi with REPLICATION = {'class': 'SimpleStrategy', 'replication_factor' : 1};
 CREATE TYPE spottyfi.song (
   songID int,
   songName text,
