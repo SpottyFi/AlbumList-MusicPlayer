@@ -1,15 +1,13 @@
-const faker = require('faker');
+const faker = require('faker'); // eslint-disable-line import/no-extraneous-dependencies
 const fs = require('fs');
-const coolImages = require('cool-images');
 
-const stream = fs.createWriteStream('../seed_data.json');
+const fileNum = process.env.FILENUM;
+const stream = fs.createWriteStream(`./seed_data/data/${fileNum}.json`);
 
-console.log('Starting data generation');
 stream.write('[');
-const MAX = 25000;
+const max = parseInt(process.env.MAX, 10);
 let counter = 0;
-for (let i = 1; i <= MAX; i += 1) {
-  console.log(MAX - i);
+for (let i = 1; i <= max; i += 1) {
   const artist = {
     artistID: i,
     artistName: faker.name.findName(),
@@ -18,10 +16,11 @@ for (let i = 1; i <= MAX; i += 1) {
   const albumNumber = faker.random.number({ min: 3, max: 6 });
   for (let j = 0; j < albumNumber; j += 1) {
     counter += 1;
+    const imgNum = Math.floor(Math.random() * 1000) + 1;
     const album = {
       albumID: i * 10 + j,
       albumName: faker.random.words(),
-      albumImage: coolImages.one(400, 400),
+      albumImage: `https://s3-us-west-1.amazonaws.com/spottyfi/images/${imgNum}.jpeg`,
       publishedYear: Math.floor(Math.random() * 69) + 1950,
       songs: [],
     };
@@ -39,9 +38,9 @@ for (let i = 1; i <= MAX; i += 1) {
     }
     artist.albums.push(album);
   }
-  stream.write(JSON.stringify(artist) + (i !== MAX ? ',' : ''));
+  stream.write(JSON.stringify(artist) + (i !== max ? ',' : ''));
 }
 stream.write(']');
 stream.end(() => {
-  console.log(counter, 'albums created');
+  console.log(`SEED SCRIPT ${fileNum} : ${counter} albums created`);
 });
