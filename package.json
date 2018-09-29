@@ -11,8 +11,7 @@
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "react-prod": "webpack --watch",
-    "seed-data": "node seedDatabase.js",
-    "gen-data": "node dataGeneration.js",
+    "seed-data": "node ./seed_data/seed.js",
     "upload-data": "mongoimport -h ds115753.mlab.com:15753 -d albumlist-musicplayer -c artists -u spottyfi -p spottyfi1! --jsonArray --file /Users/work/Dev/seed_data.json",
     "upload-local-data": "mongoimport -d albumlist-musicplayer -c artists -u spottyfi -p spottyfi1! --jsonArray --file /Users/work/Dev/seed_data.json",
     "test": "jest"
