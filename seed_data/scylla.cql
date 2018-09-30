@@ -39,4 +39,24 @@ VALUES ( 1, 'John', [
   } 
 ]);
 
+INSERT INTO spottyfi.artists 
+(artist_id, artist_name, albums) 
+VALUES ( 1, 'John', [ 
+  { 
+    album_id: 1, 
+    album_name: 'a', 
+    album_image: 'b', 
+    published_year: 1990,
+    songs: [
+      {
+        song_id: 1,
+        song_name: 'a',
+        streams: 1,
+        length: 30,
+        popularity: 343
+      }
+    ]
+  } 
+]);
+
 COPY artists FROM '/seed_data/artists.csv' WITH HEADER=TRUE AND DELIMITER=',';
