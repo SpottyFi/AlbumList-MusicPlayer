@@ -40,3 +40,8 @@ VALUES ( 1, 'John', [
 ]);
 
 COPY artists FROM '/seed_data/artists.csv' WITH HEADER=TRUE AND DELIMITER=',';
+COPY artists FROM '/users/downloads/artists.csv' WITH HEADER=TRUE AND DELIMITER=',';
+COPY artists(artist_id, artist_name, albums) 
+FROM '/Users/work/Downloads/artists.cql' WITH HEADER=TRUE AND MINBATCHSIZE=1 AND MAXBATCHSIZE=1 AND PAGESIZE=1;
+/usr/local/var/lib/cassandra/data/spottyfi;
+usr/local/var/lib/cassandra/data/spottyfi/artists-1a0796d0c5a911e8a37075c46ab9a1fc
