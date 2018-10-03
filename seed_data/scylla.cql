@@ -94,3 +94,5 @@ VALUES (3, 1, 'Cowboy Guy', 'Cowboy Songs', 'mysrc', 1990,
 { { song_id: 1, song_name: 'a', streams: 1, length: 30, popularity: 343 }, { song_id: 2, song_name: 'b', streams: 1, length: 30, popularity: 343 } });
 
 ./cassandra-loader -f artists_1.csv -host 172.17.0.2 -delim "|" -charsPerColumn 8000 -schema "spottyfi.artists(album_id, artist_id, artist_name, album_name, album_image, published_year, songs)"
+./cassandra-loader -f artists_2.csv -host 172.17.0.2 -delim "|" -charsPerColumn 8000 -schema "spottyfi.artists(album_id, artist_id, artist_name, album_name, album_image, published_year, songs)"
+docker cp nosql node1:/
