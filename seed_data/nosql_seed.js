@@ -2,8 +2,8 @@ const faker = require('faker'); // eslint-disable-line import/no-extraneous-depe
 const fs = require('fs');
 
 // Define minimum number of songs needed to be generated
-const minAlbums = 100;
-const maxPerFile = 10;
+const minAlbums = 10000000;
+const maxPerFile = 1000000;
 
 // Define common file path for all JSON files with filenum prepended to the file names.
 const filePath = 'seed_data/data/nosql/';
@@ -18,7 +18,7 @@ const throwErr = (err) => {
 
 const numOfFiles = minAlbums / maxPerFile;
 const maxNumOfArtists = Math.ceil(maxPerFile / 4);
-let totalArtistsGenerated = 0;
+let artistId = 0;
 let iterations = 0;
 let albumCount = 0;
 let songCount = 0;
@@ -33,9 +33,9 @@ for (let fileNum = 1; fileNum <= numOfFiles; fileNum += 1) {
   // Define empty string which will be populated wtih csv data and then pushed into file
   let artists = '';
 
-  for (let artistId = 1; artistId <= maxNumOfArtists; artistId += 1) {
-    totalArtistsGenerated += 1;
-    console.log('Generating artist', totalArtistsGenerated);
+  for (let i = 1; i <= maxNumOfArtists; i += 1) {
+    artistId += 1;
+    console.log('Generating artist', artistId);
     iterations += 1;
 
     // Define empty arrays which will be populated with JSON data and stored inside the artist table
@@ -70,7 +70,7 @@ for (let fileNum = 1; fileNum <= numOfFiles; fileNum += 1) {
       artists += `\n${albumId}|${artistId}|'${artistName}'|'${albumName}'|'${albumImage}'|${publishedYear}|{ ${songs.join(', ')} }`;
     }
     // Writes to file every 5000 rows, or if we have reached the end, and clears the strings.
-    if (iterations === 5000 || artistId === maxNumOfArtists) {
+    if (iterations === 5000 || i === maxNumOfArtists) {
       fs.appendFileSync(artistsFile, artists, throwErr);
       artists = '';
       iterations = 0;
@@ -78,4 +78,4 @@ for (let fileNum = 1; fileNum <= numOfFiles; fileNum += 1) {
   }
 }
 
-console.log(`NoSQL SEED: ${songCount} songs, ${albumCount} albums, and ${totalArtistsGenerated} artists generated!`);
+console.log(`NoSQL SEED: ${songCount} songs, ${albumCount} albums, and ${artistId} artists generated!`);
