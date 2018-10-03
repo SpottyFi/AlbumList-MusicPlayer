@@ -11,7 +11,7 @@
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "react-prod": "webpack --watch",
-    "seed-data": "node ./seed_data/seed.js",
+    "nosql-seed-data": "node ./seed_data/nosql_seed.js",
     "upload-data": "mongoimport -h ds115753.mlab.com:15753 -d albumlist-musicplayer -c artists -u spottyfi -p spottyfi1! --jsonArray --file /Users/work/Dev/seed_data.json",
     "upload-local-data": "mongoimport -d albumlist-musicplayer -c artists -u spottyfi -p spottyfi1! --jsonArray --file /Users/work/Dev/seed_data.json",
     "test": "jest"
@@ -48,6 +48,7 @@
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
+    "cassandra-driver": "^3.5.0",
     "css-loader": "^1.0.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "grunt": "^1.0.3",
