@@ -2,11 +2,11 @@ const faker = require('faker'); // eslint-disable-line import/no-extraneous-depe
 const fs = require('fs');
 
 // Define minimum number of songs needed to be generated
-const minSongs = 10000000;
+const minAlbums = 10000000;
 
 // Define common file path for all JSON files with filenum prepended to the file names.
 const fileNum = 0;
-const filePath = `seed/data/sql/`;
+const filePath = `seed_data/data/sql/`;
 
 // Define paths for the 3 CSV files.
 const artistsFile = `${filePath}artists.csv`;
@@ -30,7 +30,7 @@ let artists = '';
 let albums = '';
 let songs = '';
 
-const max = Math.ceil(minSongs / 40);
+const max = Math.ceil(minAlbums / 4);
 const buffer = fileNum * max;
 let iterations = 0;
 let albumId = 1;
@@ -82,4 +82,4 @@ for (let i = 1; i <= max; i += 1) {
     iterations = 0;
   }
 }
-console.log(`SEED ${fileNum}: ${songId} songs generated!`);
+console.log(`SEED ${fileNum}: ${albumId} albums generated!`);
