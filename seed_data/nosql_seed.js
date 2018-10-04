@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // Define minimum number of songs needed to be generated
 const minAlbums = 10000000;
-const maxPerFile = 1000000;
+const maxPerFile = 500000;
 
 // Define common file path for all JSON files with filenum prepended to the file names.
 const filePath = 'seed_data/data/nosql/';
