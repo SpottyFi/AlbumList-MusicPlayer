@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const { getArtist, postArtist, updateArtist, deleteArtist } = require('../database/index.js');
 const cors = require('cors');
+const {
+  getArtist, postArtist, updateArtist, deleteArtist,
+} = require('../database/index.js');
+
 const server = express();
 
 server.use(bodyParser.json());
@@ -11,20 +14,11 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static(path.join(__dirname, '../public')));
 
 server.get('/artists/albums/:artistID', (req, res) => {
-  getArtist(req.params.artistID, data => {
-    res.send(data);
-  });
+  getArtist(Number(req.params.artistID)).then(artists => res.send(artists));
 });
 
 server.post('/artists/albums', (req, res) => {
-  postArtist(req.body, (error) => {
-    if (error) {
-      console.log(error);
-      res.status(500).end(error);
-    } else {
-      res.end();
-    }
-  });
+  postArtist(req.body, () => res.end());
 });
 
 server.put('/artists/albums/:id', (req, res) => {
