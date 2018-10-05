@@ -1,55 +1,55 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://spottyfi:spottyfi1!@ds115753.mlab.com:15753/albumlist-musicplayer', { useNewUrlParser: true });
+const models = require('express-cassandra');
+const path = require('path');
 
-const db = mongoose.connection;
+models.setDirectory(path.join(__dirname, '/models')).bind(
+  {
+    clientOptions: {
+      contactPoints: ['127.0.0.1'],
+      protocolOptions: { port: 9042 },
+      keyspace: 'spottyfi',
+      queryOptions: { consistency: models.consistencies.one },
+    },
+    ormOptions: {
+      defaultReplicationStrategy: {
+        class: 'SimpleStrategy',
+        replication_factor: 1,
+      },
+      migration: 'safe',
+    },
+  },
+  (err) => {
+    if (err) throw err;
+  },
+);
 
+const getArtist = id => models.instance.Artists
+  .findAsync({ artist_id: id })
+  .catch(() => []);
 
-const ArtistSchema = new mongoose.Schema({
-  artistID: Number,
-  artistName: String,
-  albums: [{
-    albumID: Number,
-    albumName: String,
-    albumImage: String,
-    publishedYear: Number,
-    songs: [{
-      songID: Number,
-      songName: String,
-      streams: Number,
-      length: Number,
-      popularity: Number,
-      addedToLibrary: Boolean
-    }]
-  }]
-});
-
-var Artist = mongoose.model('Artist', ArtistSchema);
-
-var getArtist = (id, cb) => {
-  Artist.find({ 'artistID': id }, (err, data) => {
+const postArtist = (data, callback) => {
+  if (!Array.isArray(data)) {
+    const artist = new models.instance.Artists(data);
+    artist.save(callback);
+  }
+  const queries = data.map(artistData => new models.instance.Artists(artistData)
+    .save({ return_query: true }));
+  models.doBatch(queries, (err) => {
     if (err) {
       throw err;
     }
-    cb(data);
+    callback();
   });
 };
 
-const postArtist = (data, callback) => {
-  const artist = new Artist(data);
-  artist.save(callback);
-};
-
 const updateArtist = (id, data, callback) => {
-  Artist.updateOne({ artistID: id }, { $set: data }, callback);
+  // Artist.updateOne({ artistID: id }, { $set: data }, callback);
 };
 
 const deleteArtist = (id, callback) => {
-  Artist.deleteOne({ artistID: id }, callback);
+  // Artist.deleteOne({ artistID: id }, callback);
 };
 
 module.exports = {
-  Artist,
-  db,
   getArtist,
   postArtist,
   updateArtist,
