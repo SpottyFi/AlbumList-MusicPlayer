@@ -23,9 +23,5 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
-<<<<<<< Updated upstream
-seed_data/data/nosql/*.csv*
-=======
 seed_data/data/cassandra/*.csv
->>>>>>> Stashed changes
-seed_data/data/sql/*.csv
+seed_data/data/nosql/*.csv
