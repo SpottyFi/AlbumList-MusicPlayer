@@ -1,6 +1,6 @@
 {
   "apps": {
-    "name": "App",
+    "name": "ArtistList",
     "script": "server/index.js",
     "instances": 0,
     "autorestart": true,
