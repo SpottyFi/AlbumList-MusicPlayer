@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+require('newrelic');
 const {
   getArtist, postArtist, updateArtist, deleteArtist,
 } = require('../database/index.js');
@@ -14,6 +15,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static(path.join(__dirname, '../public')));
 
 server.get('/artists/albums/:artistID', (req, res) => {
+  console.log('Getting artist with id', req.params.artistID);
   getArtist(Number(req.params.artistID)).then(artists => res.send(artists));
 });
 
