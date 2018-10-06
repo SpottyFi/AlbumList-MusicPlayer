@@ -8,7 +8,8 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "nodemon server/index.js",
+    "start": "node server/index.js",
+    "start-dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "react-prod": "webpack --watch",
     "nosql-seed-data": "node ./seed_data/nosql_seed.js",
