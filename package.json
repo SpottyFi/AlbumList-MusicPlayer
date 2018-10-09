@@ -12,6 +12,7 @@
     "start-dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "react-prod": "webpack --watch",
+    "cassandra-seed-data": "node ./seed_data/cassandra_seed.js",
     "nosql-seed-data": "node ./seed_data/nosql_seed.js",
     "sql-seed-data": "node ./seed_data/postgres_seed.js",
     "upload-data": "mongoimport -h ds115753.mlab.com:15753 -d albumlist-musicplayer -c artists -u spottyfi -p spottyfi1! --jsonArray --file /Users/work/Dev/seed_data.json",
