@@ -1,0 +1,11 @@
+{
+  "apps": {
+    "name": "ArtistList",
+    "script": "server/index.js",
+    "instances": 0,
+    "autorestart": true,
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+}

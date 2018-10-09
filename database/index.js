@@ -22,9 +22,9 @@ models.setDirectory(path.join(__dirname, '/models')).bind(
   },
 );
 
-const getArtist = id => models.instance.Artists
+const getArtist = (id, next) => models.instance.Artists
   .findAsync({ artist_id: id })
-  .catch(() => []);
+  .catch(next);
 
 const postArtist = (data, callback) => {
   if (!Array.isArray(data)) {
