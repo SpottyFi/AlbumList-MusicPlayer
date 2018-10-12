@@ -24,4 +24,5 @@ coverage
 build/
 dist/
 seed_data/data/cassandra/*.csv
+seed_data/data/cassandra/*.zip
 seed_data/data/nosql/*.csv
