@@ -3,11 +3,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+const redis = require('redis');
+const { promisify } = require('util');
 const {
   getArtist, postArtist, updateArtist, deleteArtist,
 } = require('../database/index.js');
 
 const server = express();
+
+const cache = redis.createClient(6379, '54.214.93.216');
+const getAsyncCache = promisify(cache.get).bind(cache);
 
 server.use(bodyParser.json());
 server.use(cors());
@@ -15,8 +20,19 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static(path.join(__dirname, '../public')));
 
 server.get('/artists/albums/:artistID', (req, res, next) => {
-  // console.log('Getting artist with id', req.params.artistID);
-  getArtist(Number(req.params.artistID), next).then(artists => res.send(artists));
+  const checkDb = () => getArtist(Number(req.params.artistID), next).then((artists) => {
+    cache.setex(req.params.artistID, 604800, JSON.stringify(artists));
+    res.send(artists).end();
+  });
+
+  getAsyncCache(req.params.artistID)
+    .then((result) => {
+      if (result === null || result === '') {
+        return checkDb();
+      }
+      return res.send(JSON.parse(result)).end();
+    })
+    .catch(checkDb);
 });
 
 server.post('/artists/albums', (req, res) => {
