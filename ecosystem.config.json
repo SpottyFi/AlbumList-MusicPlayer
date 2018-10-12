@@ -4,6 +4,7 @@
     "script": "server/index.js",
     "instances": 0,
     "autorestart": true,
+    "watch": true,
     "env": {
       "NODE_ENV": "production"
     }
