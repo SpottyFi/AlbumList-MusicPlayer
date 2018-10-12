@@ -1,7 +1,7 @@
 import http from 'k6/http';
 
 export const options = {
-  vus: 400,
+  vus: 100,
   duration: '1m',
   rps: 3000,
 };
@@ -9,5 +9,5 @@ export const options = {
 export default function () {
   const id = Math.floor(Math.random() * (2500000 - 2000000)) + 2000000;
   // const id = Math.floor(Math.random() * 2500000) + 1;
-  http.get(`http://localhost:3001/artists/albums/${id}`);
+  http.get(`http://54.200.106.231/artists/albums/${id}`, { tags: { name: 'PostsItemURL' } });
 }
